@@ -15,9 +15,9 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-<x-navbar>
+<x-navigation>
     
-</x-navbar>
+</x-navigation>
 
 
 <main> 

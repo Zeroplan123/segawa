@@ -1,4 +1,4 @@
-<x-layouts :takeline="$takeline" :title="$title">
+<x-layouts :title="$title" :title="$title">
 
     <!-- Clean Professional Header -->
     <section class="bg-white py-16 border-b border-gray-200">

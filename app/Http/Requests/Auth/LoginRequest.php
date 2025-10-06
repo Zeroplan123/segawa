@@ -14,7 +14,6 @@ class LoginRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-
     protected $user_type;
     public function authorize(): bool
     {
@@ -29,16 +28,17 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_cred' => ['required', 'string'],
+             'user_cred' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
     }
 
-    protected function prepareForValidation(): void
+        protected function prepareForValidation(): void
 {
     $this->user_type = (filter_var($this->input('user_cred'), FILTER_VALIDATE_EMAIL)) ? 'email' : 'username';
+
     $this->merge([
-       $this->user_type => $this->input('user_cred'),
+        $this->user_type => $this->input('user_cred'),
     ]);
 }
 

@@ -32,5 +32,29 @@ class post extends Model {
         return $this->belongsToMany(Category::class);
     }
 
+      public function scopeFilter($query, array $filters)
+    {
+        // filter by search keyword
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('body', 'like', '%' . $search . '%');
+        });
+
+        // filter by category
+        $query->when($filters['category'] ?? false, function ($query, $category) {
+            $query->whereHas('categories', function ($q) use ($category) {
+                $q->where('slug', $category);
+            });
+        });
+
+        // filter by author
+        $query->when($filters['author'] ?? false, function ($query, $author) {
+            $query->whereHas('author', function ($q) use ($author) {
+                $q->where('username', $author);
+            });
+        });
+
+    }
+
 
 }
